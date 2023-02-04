@@ -13,6 +13,9 @@
         <el-menu-item index="2-4-3">item three</el-menu-item>
       </el-sub-menu>
     </el-sub-menu>
+    <el-menu-item index="3" @click="go_page('login')">
+      <template #title>登录</template>
+    </el-menu-item>
   </el-menu>
   <el-menu class="func" text-color="#fff" active-text-color="#fff" background-color="#EC4141FF">
     <el-menu-item index="1" @click="close_window"><el-icon><Close /></el-icon></el-menu-item>
@@ -25,6 +28,11 @@
 <script lang="ts" setup>
 import {ipcRenderer} from "electron"
 import {ref} from "vue";
+import router from "@/router";
+
+const go_page = (pageName) => {
+  router.push({name: pageName})
+}
 
 const isMaximized = ref(false)
 

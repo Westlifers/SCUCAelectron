@@ -25,4 +25,15 @@ html {
   text-align: center;
   color: #2c3e50;
 }
+
+/**修改全局的滚动条*/
+/**滚动条的宽度*/
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #eaecf1;
+    border-radius: 3px;
+  }
 </style>

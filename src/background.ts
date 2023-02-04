@@ -15,7 +15,7 @@ async function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
     width: 1024,
-    height: 600,
+    height: 800,
     webPreferences: {
       nodeIntegration: true,
       preload: path.resolve(__dirname, 'preload.js'),

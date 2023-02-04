@@ -33,4 +33,8 @@ export default defineComponent({
   -webkit-app-region: drag;
 }
 
+.el-main {
+  padding: 0;
+}
+
 </style>
