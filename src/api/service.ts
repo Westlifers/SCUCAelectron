@@ -2,7 +2,7 @@ import request from "@/api/index";
 
 export async function login(data: any) {
     return request({
-        url: '/user/login',
+        url: '/user/login/',
         method: 'post',
         data
     })
@@ -10,7 +10,7 @@ export async function login(data: any) {
 
 export function logout() {
     return request({
-        url: '/user/logout',
+        url: '/user/logout/',
         method: 'get'
     })
 }
@@ -18,7 +18,7 @@ export function logout() {
 
 export function register(data: any) {
     return request({
-        url: '/user/',
+        url: '/register/',
         method: 'post',
         data
     })

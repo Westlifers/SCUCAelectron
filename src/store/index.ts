@@ -1,22 +1,19 @@
 import {createStore} from 'vuex'
 
-import { User } from '@/types'
+import {User} from '@/types'
+import {ElNotification} from "element-plus";
 
 export const SET_USER = 'setUser';
 export const CLEAR_USER = 'clearUser'
 
 export const initDefaultUserInfo = (): User => {
-  let user: User = {
+  return {
     id: 0,
     username: "",
     email: '',
     is_active: false,
     is_superuser: false,
   }
-  if (window.sessionStorage.userInfo) {
-    user = JSON.parse(window.sessionStorage.userInfo);
-  }
-  return user
 }
 
 export const store = createStore({
@@ -33,6 +30,11 @@ export const store = createStore({
     },
     clearUser(state: object | any) {
       state.user = initDefaultUserInfo();
+      ElNotification({
+        title: '成功',
+        message: '登出成功！',
+        type: 'success',
+      })
     },
   },
   actions: {

@@ -58,13 +58,10 @@
 <script lang="ts" setup>
 
 import {ref} from "vue";
-import router from "@/router";
+import {go_page} from "@/utils";
 
 const isCollapse = ref(true)
 
-const go_page = (pageName) => {
-  router.push({name: pageName})
-}
 
 </script>
 

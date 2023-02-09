@@ -28,11 +28,8 @@
 <script lang="ts" setup>
 import {ipcRenderer} from "electron"
 import {ref} from "vue";
-import router from "@/router";
+import {go_page} from "@/utils";
 
-const go_page = (pageName) => {
-  router.push({name: pageName})
-}
 
 const isMaximized = ref(false)
 

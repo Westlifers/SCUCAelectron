@@ -5,7 +5,8 @@ import {getCookie} from "@/utils";
 
 
 const request = axios.create({
-    baseURL: 'http://127.0.0.1:8000/'
+    baseURL: 'http://127.0.0.1:8000/',
+    withCredentials: true
 })
 
 request.interceptors.request.use((config) => {

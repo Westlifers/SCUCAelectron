@@ -7,8 +7,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
+import {ref} from 'vue'
 import DataTable from "@/views/overview/components/DataTable.vue";
+
 const activeName = ref('first')
 
 const events = ['222', '333', '444', '555', '666', '777', 'SQ1', 'Py', '333OH']

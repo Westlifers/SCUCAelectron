@@ -1,17 +1,21 @@
 <template>
 
-  <el-container>
+  <el-container id="asd">
     <el-header>
       <nav-header />
     </el-header>
 
     <el-container>
       <nav-side-bar />
-      <el-main>
-        <router-view></router-view>
-      </el-main>
+      <el-container>
+        <el-main>
+          <router-view></router-view>
+        </el-main>
+      </el-container>
     </el-container>
   </el-container>
+
+  <nav-affix />
 
 </template>
 
@@ -20,10 +24,11 @@ import NavSideBar from "@/layout/components/NavSideBar.vue";
 import NavHeader from "@/layout/components/NavHeader.vue";
 
 import {defineComponent} from 'vue'
+import NavAffix from "@/layout/components/NavAffix.vue";
 
 export default defineComponent({
   name: 'App',
-  components: {NavSideBar, NavHeader}
+  components: {NavAffix, NavSideBar, NavHeader}
 });
 </script>
 
@@ -35,6 +40,10 @@ export default defineComponent({
 
 .el-main {
   padding: 0;
+}
+
+#asd {
+  height: 100vh;
 }
 
 </style>

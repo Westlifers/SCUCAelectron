@@ -9,7 +9,7 @@
     <el-form-item label="账号" prop="account">
       <el-input
           v-model="state.loginForm.account"
-          placeholder="Enter Email..."
+          placeholder="Enter Username..."
       ></el-input>
     </el-form-item>
     <el-form-item label="密码" prop="password">
@@ -25,7 +25,7 @@
           @click="handleLogin(loginFormRef)"
           type="primary"
           class="submit-btn"
-      >提交</el-button
+      >登录</el-button
       >
     </el-form-item>
 
@@ -40,7 +40,7 @@
 import {reactive, ref} from "vue";
 import {User} from "@/types";
 import {SET_USER, store} from "@/store";
-import {FormInstance} from "element-plus";
+import {ElNotification, FormInstance} from "element-plus";
 import {login} from "@/api/service";
 import router from "@/router";
 
@@ -99,6 +99,11 @@ const handleLogin = (formEl: FormInstance | undefined) => {
           user,
         });
         window.sessionStorage.userInfo = JSON.stringify(user);
+        ElNotification({
+          title: '成功',
+          message: '用户登录成功！',
+          type: 'success',
+        })
         await router.push({name: 'overview'})
       } catch (e) {
         await router.push({name: 'login'})

@@ -1,3 +1,5 @@
+import router from "@/router";
+
 export function getCookie(cName: string) {
     if (document.cookie.length > 0) {
         let cStart = document.cookie.indexOf(cName + "=");
@@ -9,4 +11,8 @@ export function getCookie(cName: string) {
         }
     }
     return "";
+}
+
+export function go_page(pageName) {
+    router.push({name: pageName})
 }
