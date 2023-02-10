@@ -1,60 +1,46 @@
 <template>
   <el-tabs v-model="activeName" class="demo-tabs" type="card">
     <el-tab-pane v-for="(event, key) in events" :key="key" :name="event" :label="event">
-      <DataTable :table-data="tableData[event]"></DataTable>
+      <DataTable :table-data="ClassifiedTableData[event]"></DataTable>
     </el-tab-pane>
   </el-tabs>
 </template>
 
 <script lang="ts" setup>
-import {ref} from 'vue'
+import {computed, ref} from 'vue'
 import DataTable from "@/views/overview/components/DataTable.vue";
+import {getCurrentWeekComp} from "@/api/fetchCompetition";
 
-const activeName = ref('first')
+const activeName = ref('')
 
-const events = ['222', '333', '444', '555', '666', '777', 'SQ1', 'Py', '333OH']
+const tableData = await getCurrentWeekComp()
 
-interface UserResult {
-  username: string,
-  time1: number,
-  time2: number,
-  time3: number,
-  time4: number,
-  time5: number,
-  avg: number
-}
+const ClassifiedTableData = computed(() => {
+  const classifiedData = {}
+  const eventsGot: string[] = []
+  for (const result of tableData.result_set) {
+    if (eventsGot.indexOf(result.event) > -1) {
+      classifiedData[result.event].push(result)
+    } else {
+      classifiedData[result.event] = [result]
+      eventsGot.push(result.event)
+    }
+  }
 
+  return classifiedData
+})
 
+const events = computed(() => {
+  const eventsGot: string[] = []
+  for (const result of tableData.result_set) {
+    if (!(eventsGot.indexOf(result.event) > -1)) {
+      eventsGot.push(result.event)
+    }
+  }
 
+  return eventsGot
+})
 
-
-
-
-// 测试数据
-const tableData: {[key:string]:UserResult[]} = {
-  '333': [
-    {
-      username: '孟一凡',
-      time1: 1,
-      time2: 1,
-      time3: 1,
-      time4: 1,
-      time5: 0,
-      avg: 1
-    },
-  ],
-  '444': [
-    {
-      username: '孟一凡',
-      time1: 12.21,
-      time2: 17.95,
-      time3: 100,
-      time4: -1,
-      time5: 0,
-      avg: 1
-    },
-  ]
-}
 </script>
 
 <style scoped>
@@ -62,5 +48,11 @@ const tableData: {[key:string]:UserResult[]} = {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+}
+.el-tabs {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 </style>
