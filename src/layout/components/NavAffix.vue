@@ -11,7 +11,7 @@
       </template>
       <template #default>
         <div class="hello">
-          <h3>{{isLoggedIn?'你好，' + userData['username']: '请登录'}}</h3>
+          <h3>{{isLoggedIn?'你好，' + userData[0]['username']: '请登录'}}</h3>
           <el-button v-if="isLoggedIn" @click="logout_all" round>登出</el-button>
           <el-button v-if="!isLoggedIn" @click="go_page('login')" round>登陆</el-button>
         </div>
