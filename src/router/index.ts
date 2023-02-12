@@ -6,6 +6,8 @@ import overView from "@/views/overview/OverViewSuspense.vue";
 import loginRegister from "@/views/login/LoginRegister.vue";
 import scuRecord from '@/views/record/RecordSuspense.vue'
 import specialSuspense from "@/views/special/SpecialSuspense.vue";
+import historyListSuspense from "@/views/history/list/HistoryListSuspense.vue";
+import historyDetailSuspense from "@/views/history/detail/HistoryDetailSuspense.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -40,6 +42,23 @@ const routes: Array<RouteRecordRaw> = [
         path: 'index',
         component: specialSuspense,
         name: 'special'
+      }
+    ]
+  },
+
+
+  {
+    path: '/history',
+    component: layout,
+    children: [
+      {
+        path: 'index',
+        component: historyListSuspense,
+        name: 'history'
+      },
+      {
+        path: 'detail/:compId',
+        component: historyDetailSuspense
       }
     ]
   },

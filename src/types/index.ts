@@ -18,10 +18,15 @@ export interface Result {
     best: number
 }
 
-export interface DetailedCompetition {
+
+export interface OmittedCompetition {
     compId: string,
     is_normal: boolean,
     ongoing: boolean,
+}
+
+
+export interface DetailedCompetition extends OmittedCompetition{
     result_set: Result[],
 }
 

@@ -1,5 +1,5 @@
 import request from "@/api/index";
-import {DetailedCompetition, OmittedResultAvg, OmittedResultBest, Record, Result} from "@/types";
+import {DetailedCompetition, OmittedCompetition, OmittedResultAvg, OmittedResultBest, Record, Result} from "@/types";
 
 export async function getComp (compId: string): Promise<DetailedCompetition> {
     let res
@@ -79,4 +79,25 @@ export async function getScuRecord (): Promise<Record> {
     }
 
     return record
+}
+
+
+export async function getCompetitionList (): Promise<OmittedCompetition[]>  {
+    const res= await request({
+        url: '/competition/',
+        method: 'get'
+    })
+    const compList: OmittedCompetition[] = []
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    for (const comp of res) {
+        compList.push({
+            compId: comp['compId'],
+            ongoing: comp['ongoing'],
+            is_normal: comp['is_normal']
+        })
+    }
+
+    return compList
 }

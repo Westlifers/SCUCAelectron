@@ -23,12 +23,26 @@
     </el-sub-menu>
 
 
-    <el-menu-item index="2" @click="go_page('special')">
-      <el-icon><Opportunity /></el-icon>
-      <template #title>特殊赛事</template>
-    </el-menu-item>
+    <el-sub-menu index="2">
+      <template #title>
+        <el-icon><Opportunity /></el-icon>
+        <span>特殊赛事</span>
+      </template>
 
-    <el-menu-item index="3" @click="go_page('history')" disabled>
+      <el-menu-item index="2-1" @click="go_page('special')">
+        <el-icon><TrendCharts /></el-icon>
+        <template #title>成绩总览</template>
+      </el-menu-item>
+
+      <el-menu-item index="2-2" @click="go_page('cubing')" disabled>
+        <el-icon><Grid /></el-icon>
+        <template #title>进行复原</template>
+      </el-menu-item>
+
+    </el-sub-menu>
+
+
+    <el-menu-item index="3" @click="go_page('history')">
       <el-icon><document /></el-icon>
       <template #title>历史赛事</template>
     </el-menu-item>
