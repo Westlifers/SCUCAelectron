@@ -17,16 +17,7 @@ const props = defineProps<{
 
 let tableData
 
-switch (props.comp) {
-  case 'week':
-    tableData = await getComp('', 1)
-    break
-  case 'special':
-    tableData = await getComp('', 2)
-    break
-  default:
-    tableData = await getComp(props.comp, 0)
-}
+tableData = await getComp(props.comp)
 
 const activeName = ref('')
 

@@ -1,17 +1,17 @@
 import request from "@/api/index";
 import {DetailedCompetition, OmittedResultAvg, OmittedResultBest, Record, Result} from "@/types";
 
-export async function getComp (compId: string, spec: number): Promise<DetailedCompetition> {
+export async function getComp (compId: string): Promise<DetailedCompetition> {
     let res
-    // 当spec为1，查询当前周赛；为2，查询当前正赛；为0，查询compId对应的比赛
-    switch (spec) {
-        case 1:
+    // 当comp为'week'，查询当前周赛；为'special'，查询当前正赛；为其它，查询compId对应的比赛
+    switch (compId) {
+        case 'week':
             res = await request({
                 url: '/competition/week/ongoing/',
                 method: 'get',
             })
             break
-        case 2:
+        case 'special':
             res = await request({
                 url: '/competition/special/ongoing/',
                 method: 'get',
