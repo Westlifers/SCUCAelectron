@@ -4,6 +4,7 @@ import home2View from "@/views/Home2View.vue";
 import aboutUs from "@/views/about/AboutUs.vue";
 import overView from "@/views/overview/OverViewSuspense.vue";
 import loginRegister from "@/views/login/LoginRegister.vue";
+import scuRecord from '@/views/record/RecordSuspense.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -25,6 +26,19 @@ const routes: Array<RouteRecordRaw> = [
         path: 'cubing',
         component: home2View,
         name: 'cubing'
+      }
+    ]
+  },
+
+
+  {
+    path: '/record',
+    component: layout,
+    children: [
+      {
+        path: 'index',
+        component: scuRecord,
+        name: 'record'
       }
     ]
   },

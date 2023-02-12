@@ -28,7 +28,7 @@
       <template #title>历史赛事</template>
     </el-menu-item>
 
-    <el-menu-item index="3" @click="go_page('record')" disabled>
+    <el-menu-item index="3" @click="go_page('record')">
       <el-icon><Medal /></el-icon>
       <template #title>社团记录</template>
     </el-menu-item>

@@ -24,3 +24,25 @@ export interface DetailedCompetition {
     ongoing: boolean,
     result_set: Result[],
 }
+
+
+interface OmittedResult {
+    event: string
+    username: string
+}
+
+
+export interface OmittedResultAvg extends OmittedResult {
+    avg: number
+}
+
+
+export interface OmittedResultBest extends OmittedResult {
+    best: number
+}
+
+
+export interface Record {
+    avg: OmittedResultAvg[]
+    best: OmittedResultBest[]
+}

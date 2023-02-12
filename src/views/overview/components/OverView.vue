@@ -9,7 +9,7 @@
 <script lang="ts" setup>
 import {computed, ref} from 'vue'
 import DataTable from "@/views/overview/components/DataTable.vue";
-import {getCurrentWeekComp} from "@/api/fetchCompetition";
+import {getCurrentWeekComp} from "@/api/fetchData";
 
 const activeName = ref('')
 
