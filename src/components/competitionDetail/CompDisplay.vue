@@ -8,12 +8,27 @@
 
 <script lang="ts" setup>
 import {computed, ref} from 'vue'
-import DataTable from "@/views/overview/components/DataTable.vue";
-import {getCurrentWeekComp} from "@/api/fetchData";
+import DataTable from "@/components/competitionDetail/DataTable.vue";
+import {getComp} from "@/api/fetchData";
+
+const props = defineProps<{
+  comp: string
+}>()
+
+let tableData
+
+switch (props.comp) {
+  case 'week':
+    tableData = await getComp('', 1)
+    break
+  case 'special':
+    tableData = await getComp('', 2)
+    break
+  default:
+    tableData = await getComp(props.comp, 0)
+}
 
 const activeName = ref('')
-
-const tableData = await getCurrentWeekComp()
 
 const ClassifiedTableData = computed(() => {
   const classifiedData = {}

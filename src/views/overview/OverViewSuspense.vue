@@ -1,12 +1,12 @@
 <template>
   <Suspense>
-    <over-view />
+    <comp-display comp="week" />
   </Suspense>
 </template>
 
 <script lang="ts" setup>
 
-import OverView from "@/views/overview/components/OverView.vue";</script>
+import CompDisplay from "@/components/competitionDetail/CompDisplay.vue";</script>
 
 <style scoped>
 

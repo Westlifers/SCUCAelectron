@@ -23,30 +23,35 @@
     </el-sub-menu>
 
 
-    <el-menu-item index="2" @click="go_page('history')" disabled>
+    <el-menu-item index="2" @click="go_page('special')">
+      <el-icon><Opportunity /></el-icon>
+      <template #title>特殊赛事</template>
+    </el-menu-item>
+
+    <el-menu-item index="3" @click="go_page('history')" disabled>
       <el-icon><document /></el-icon>
       <template #title>历史赛事</template>
     </el-menu-item>
 
-    <el-menu-item index="3" @click="go_page('record')">
+    <el-menu-item index="4" @click="go_page('record')">
       <el-icon><Medal /></el-icon>
       <template #title>社团记录</template>
     </el-menu-item>
 
 
-    <el-menu-item index="4" @click="go_page('dataAnalysis')" disabled>
+    <el-menu-item index="5" @click="go_page('dataAnalysis')" disabled>
       <el-icon><DataAnalysis /></el-icon>
       <template #title>数据分析</template>
     </el-menu-item>
 
 
-    <el-menu-item index="5" @click="go_page('setting')" disabled>
+    <el-menu-item index="6" @click="go_page('setting')" disabled>
       <el-icon><setting /></el-icon>
       <template #title>设置</template>
     </el-menu-item>
 
 
-    <el-menu-item index="6" @click="go_page('about')">
+    <el-menu-item index="7" @click="go_page('about')">
       <el-icon><InfoFilled /></el-icon>
       <template #title>关于</template>
     </el-menu-item>
