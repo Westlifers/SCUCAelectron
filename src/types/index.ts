@@ -23,6 +23,8 @@ export interface OmittedCompetition {
     compId: string,
     is_normal: boolean,
     ongoing: boolean,
+    user_count: number,
+    event_count: number
 }
 
 

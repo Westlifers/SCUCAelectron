@@ -25,24 +25,28 @@ export async function getComp (compId: string): Promise<DetailedCompetition> {
     }
 
     const result_set: Result[] = []
-    for (const result_req of res['result_set']) {
-        const result: Result = {
-            username: result_req['user'],
-            event: result_req['event'],
-            time_1: result_req['time_1'],
-            time_2: result_req['time_2'],
-            time_3: result_req['time_3'],
-            time_4: result_req['time_4'],
-            time_5: result_req['time_5'],
-            avg: result_req['avg'],
-            best: result_req['best']
+    if (res['result_set'].length > 0) {
+        for (const result_req of res['result_set']) {
+            const result: Result = {
+                username: result_req['user'],
+                event: result_req['event'],
+                time_1: result_req['time_1'],
+                time_2: result_req['time_2'],
+                time_3: result_req['time_3'],
+                time_4: result_req['time_4'],
+                time_5: result_req['time_5'],
+                avg: result_req['avg'],
+                best: result_req['best']
+            }
+            result_set.push(result)
         }
-        result_set.push(result)
     }
     const comp: DetailedCompetition = {
         compId: res['compId'],
         is_normal: res['is_normal'],
         ongoing: res['ongoing'],
+        user_count: res['user_count'],
+        event_count: res['event_count'],
         result_set: result_set
     }
     return comp
@@ -95,7 +99,9 @@ export async function getCompetitionList (): Promise<OmittedCompetition[]>  {
         compList.push({
             compId: comp['compId'],
             ongoing: comp['ongoing'],
-            is_normal: comp['is_normal']
+            is_normal: comp['is_normal'],
+            event_count: comp['event_count'],
+            user_count: comp['user_count'],
         })
     }
 
