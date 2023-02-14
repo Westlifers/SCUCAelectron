@@ -15,8 +15,6 @@
     </el-container>
   </el-container>
 
-  <nav-affix />
-
 </template>
 
 <script lang="ts">
@@ -24,11 +22,10 @@ import NavSideBar from "@/layout/components/NavSideBar.vue";
 import NavHeader from "@/layout/components/NavHeader.vue";
 
 import {defineComponent} from 'vue'
-import NavAffix from "@/layout/components/NavAffix.vue";
 
 export default defineComponent({
   name: 'App',
-  components: {NavAffix, NavSideBar, NavHeader}
+  components: {NavSideBar, NavHeader}
 });
 </script>
 

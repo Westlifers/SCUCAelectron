@@ -21,6 +21,7 @@
     <el-menu-item index="1" @click="close_window"><el-icon><Close /></el-icon></el-menu-item>
     <el-menu-item index="2" @click="maximize_or_restore_window"><el-icon><FullScreen /></el-icon></el-menu-item>
     <el-menu-item index="3" @click="minimize_window"><el-icon><SemiSelect /></el-icon></el-menu-item>
+    <div class="user-popover"><nav-user /></div>
   </el-menu>
   <div class="h-6" />
 </template>
@@ -29,6 +30,7 @@
 import {ipcRenderer} from "electron"
 import {ref} from "vue";
 import {go_page} from "@/utils";
+import NavUser from "@/layout/components/NavUser.vue";
 
 
 const isMaximized = ref(false)
@@ -65,5 +67,10 @@ const maximize_or_restore_window = () => {
 }
 .el-menu-item, .el-sub-menu {
   -webkit-app-region: no-drag;
+}
+.user-popover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 </style>

@@ -48,7 +48,7 @@ const signUpMode = ref(false)
   position: relative;
   width: 100%;
   background-color: #fff;
-  min-height: 100vh;
+  height: 100%;
   overflow: hidden;
 }
 
