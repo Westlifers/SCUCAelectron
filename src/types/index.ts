@@ -53,3 +53,18 @@ export interface Record {
     avg: OmittedResultAvg[]
     best: OmittedResultBest[]
 }
+
+
+export interface OmittedResultAvgWithCompId extends OmittedResultAvg {
+    compId: string
+}
+
+
+export interface OmittedResultBestWithCompId extends OmittedResultBest {
+    compId: string
+}
+export interface RankPaginationData {
+    count: number,
+    results: OmittedResultAvgWithCompId[] | OmittedResultBestWithCompId[],
+    current: number
+}

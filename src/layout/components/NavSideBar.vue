@@ -59,13 +59,19 @@
     </el-menu-item>
 
 
-    <el-menu-item index="6" @click="go_page('setting')" disabled>
+    <el-menu-item index="6" @click="go_page('rank')">
+      <el-icon><Tickets /></el-icon>
+      <template #title>排名</template>
+    </el-menu-item>
+
+
+    <el-menu-item index="7" @click="go_page('setting')" disabled>
       <el-icon><setting /></el-icon>
       <template #title>设置</template>
     </el-menu-item>
 
 
-    <el-menu-item index="7" @click="go_page('about')">
+    <el-menu-item index="8" @click="go_page('about')">
       <el-icon><InfoFilled /></el-icon>
       <template #title>关于</template>
     </el-menu-item>

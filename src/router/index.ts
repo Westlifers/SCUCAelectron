@@ -8,11 +8,12 @@ import scuRecord from '@/views/record/RecordSuspense.vue'
 import specialSuspense from "@/views/special/SpecialSuspense.vue";
 import historyListSuspense from "@/views/history/list/HistoryListSuspense.vue";
 import historyDetailSuspense from "@/views/history/detail/HistoryDetailSuspense.vue";
+import rankSuspense from "@/views/rank/RankSuspense.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/thisWeek',
+    redirect: '/login/index',
   },
 
 
@@ -72,6 +73,19 @@ const routes: Array<RouteRecordRaw> = [
         path: 'index',
         component: scuRecord,
         name: 'record'
+      }
+    ]
+  },
+
+
+  {
+    path: '/rank',
+    component: layout,
+    children: [
+      {
+        path: 'index',
+        component: rankSuspense,
+        name: 'rank'
       }
     ]
   },

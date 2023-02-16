@@ -1,5 +1,13 @@
 import request from "@/api/index";
-import {DetailedCompetition, OmittedCompetition, OmittedResultAvg, OmittedResultBest, Record, Result} from "@/types";
+import {
+    DetailedCompetition,
+    OmittedCompetition,
+    OmittedResultAvg,
+    OmittedResultBest,
+    RankPaginationData,
+    Record,
+    Result
+} from "@/types";
 
 export async function getComp (compId: string): Promise<DetailedCompetition> {
     let res
@@ -87,7 +95,7 @@ export async function getScuRecord (): Promise<Record> {
 
 
 export async function getCompetitionList (): Promise<OmittedCompetition[]>  {
-    const res= await request({
+    const res = await request({
         url: '/competition/',
         method: 'get'
     })
@@ -106,4 +114,20 @@ export async function getCompetitionList (): Promise<OmittedCompetition[]>  {
     }
 
     return compList
+}
+
+
+export async function getRank (event: string, aorb: string, page: number): Promise<RankPaginationData> {
+    const res = await request({
+        url: `/rank/${event}/${aorb}/?page=${page}`,
+        method: 'get'
+    })
+
+    const rankPaginationData: RankPaginationData = {
+        count: res['count'],
+        current: res['current'],
+        results: res['results']
+    }
+
+    return rankPaginationData
 }
