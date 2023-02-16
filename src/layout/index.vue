@@ -1,6 +1,6 @@
 <template>
 
-  <el-container id="asd">
+  <el-container id="largest-container">
     <el-header>
       <nav-header />
     </el-header>
@@ -39,7 +39,7 @@ export default defineComponent({
   padding: 0;
 }
 
-#asd {
+#largest-container {
   height: 100vh;
 }
 
