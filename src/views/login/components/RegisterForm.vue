@@ -123,6 +123,14 @@ const handleRegister = (formEl: FormInstance | undefined) => {
         })
         await router.push({name: 'login'})
       } catch (e) {
+        // 原谅我这么写，不想认真写了，以后再改吧
+        if (e==='Request failed with status code 500') {
+          ElNotification({
+            title: '注册失败',
+            message: '用户名已存在！',
+            type: 'error',
+          })
+        }
         await router.push({name: 'login'})
       }
     }

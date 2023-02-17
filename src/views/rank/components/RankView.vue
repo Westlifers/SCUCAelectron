@@ -32,11 +32,7 @@ import {RankPaginationData} from "@/types";
 
 // contributed by ChatGPT, cheers for AI!
 
-const paginationData: Ref<RankPaginationData> = ref({
-  count: 0,
-  results: [],
-  current: 0
-})
+const paginationData: Ref<RankPaginationData> = ref(await getRank('333', 'avg', 1))
 
 const loadPaginationData = async () => {
   return await getRank(event.value, aorb.value, page.value)
