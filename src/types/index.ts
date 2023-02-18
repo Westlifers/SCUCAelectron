@@ -28,8 +28,19 @@ export interface OmittedCompetition {
 }
 
 
+export interface Scramble {
+    event: string,
+    scramble_1: string,
+    scramble_2: string,
+    scramble_3: string,
+    scramble_4: string,
+    scramble_5: string
+}
+
+
 export interface DetailedCompetition extends OmittedCompetition{
     result_set: Result[],
+    scramble_set: Scramble[]
 }
 
 
@@ -63,8 +74,22 @@ export interface OmittedResultAvgWithCompId extends OmittedResultAvg {
 export interface OmittedResultBestWithCompId extends OmittedResultBest {
     compId: string
 }
+
+
 export interface RankPaginationData {
     count: number,
     results: OmittedResultAvgWithCompId[] | OmittedResultBestWithCompId[],
     current: number
+}
+
+
+interface SingleParticipationData {
+    events_all: string[],
+    events_finished: string[]
+}
+
+
+export interface UserParticipationData {
+    week: SingleParticipationData
+    special: SingleParticipationData
 }

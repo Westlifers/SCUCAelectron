@@ -15,7 +15,7 @@
         <template #title>成绩总览</template>
       </el-menu-item>
 
-      <el-menu-item index="1-2" @click="go_page('cubing')" disabled>
+      <el-menu-item index="1-2" @click="go_page('weekCubing')">
         <el-icon><Grid /></el-icon>
         <template #title>进行复原</template>
       </el-menu-item>
@@ -34,7 +34,7 @@
         <template #title>成绩总览</template>
       </el-menu-item>
 
-      <el-menu-item index="2-2" @click="go_page('cubing')" disabled>
+      <el-menu-item index="2-2" @click="go_page('specialCubing')">
         <el-icon><Grid /></el-icon>
         <template #title>进行复原</template>
       </el-menu-item>

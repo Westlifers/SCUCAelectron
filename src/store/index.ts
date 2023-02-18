@@ -1,10 +1,13 @@
 import {createStore} from 'vuex'
 
-import {User} from '@/types'
+import {User, UserParticipationData} from '@/types'
 import {ElNotification} from "element-plus";
+import {getUserParticipationData} from "@/api/fetchData";
 
-export const SET_USER = 'setUser';
+export const SET_USER = 'setUser'
 export const CLEAR_USER = 'clearUser'
+
+export const UPDATE_USER_PARTICIPATION_DATA = 'updateUserParticipationData'
 
 export const initDefaultUserInfo = (): User => {
   return {
@@ -16,9 +19,23 @@ export const initDefaultUserInfo = (): User => {
   }
 }
 
+export const initUserParticipationData = (): UserParticipationData => {
+  return {
+    week: {
+      events_all: [],
+      events_finished: []
+    },
+    special: {
+      events_all: [],
+      events_finished: []
+    }
+  }
+}
+
 export const store = createStore({
   state: {
     user: initDefaultUserInfo(),  // 用户数据
+    userParticipation: initUserParticipationData()
   },
   getters: {
   },
@@ -36,6 +53,9 @@ export const store = createStore({
         type: 'success',
       })
     },
+    async updateUserParticipationData(state: object | any) {
+      state.userParticipation = await getUserParticipationData()
+    }
   },
   actions: {
   },

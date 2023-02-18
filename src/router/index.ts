@@ -1,6 +1,5 @@
 import {createRouter, createWebHashHistory, RouteRecordRaw} from 'vue-router'
 import layout from "@/layout/index.vue"
-import home2View from "@/views/Home2View.vue";
 import aboutUs from "@/views/about/AboutUs.vue";
 import overView from "@/views/overview/OverViewSuspense.vue";
 import loginRegister from "@/views/login/LoginRegister.vue";
@@ -9,6 +8,8 @@ import specialSuspense from "@/views/special/SpecialSuspense.vue";
 import historyListSuspense from "@/views/history/list/HistoryListSuspense.vue";
 import historyDetailSuspense from "@/views/history/detail/HistoryDetailSuspense.vue";
 import rankSuspense from "@/views/rank/RankSuspense.vue";
+import weekCubingSuspense from "@/views/cubing/WeekCubingSuspense.vue";
+import specialCubingSuspense from "@/views/cubing/SpecialCubingSuspense.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -28,8 +29,8 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'cubing',
-        component: home2View,
-        name: 'cubing'
+        component: weekCubingSuspense,
+        name: 'weekCubing'
       }
     ]
   },
@@ -43,6 +44,11 @@ const routes: Array<RouteRecordRaw> = [
         path: 'index',
         component: specialSuspense,
         name: 'special'
+      },
+      {
+        path: 'cubing',
+        component: specialCubingSuspense,
+        name: 'specialCubing'
       }
     ]
   },

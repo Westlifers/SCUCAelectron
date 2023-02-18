@@ -6,7 +6,9 @@ import {
     OmittedResultBest,
     RankPaginationData,
     Record,
-    Result
+    Result,
+    Scramble,
+    UserParticipationData
 } from "@/types";
 
 export async function getComp (compId: string): Promise<DetailedCompetition> {
@@ -49,15 +51,29 @@ export async function getComp (compId: string): Promise<DetailedCompetition> {
             result_set.push(result)
         }
     }
-    const comp: DetailedCompetition = {
+    const scramble_set: Scramble[] = []
+    if (res['scramble_set'].length > 0) {
+        for (const scramble_req of res['scramble_set']) {
+            const scramble: Scramble = {
+                event: scramble_req['event'],
+                scramble_1: scramble_req['scramble_1'],
+                scramble_2: scramble_req['scramble_2'],
+                scramble_3: scramble_req['scramble_3'],
+                scramble_4: scramble_req['scramble_4'],
+                scramble_5: scramble_req['scramble_5'],
+            }
+            scramble_set.push(scramble)
+        }
+    }
+    return {
         compId: res['compId'],
         is_normal: res['is_normal'],
         ongoing: res['ongoing'],
         user_count: res['user_count'],
         event_count: res['event_count'],
-        result_set: result_set
+        result_set: result_set,
+        scramble_set: scramble_set
     }
-    return comp
 }
 
 
@@ -123,11 +139,33 @@ export async function getRank (event: string, aorb: string, page: number): Promi
         method: 'get'
     })
 
-    const rankPaginationData: RankPaginationData = {
+    return {
         count: res['count'],
         current: res['current'],
         results: res['results']
     }
+}
 
-    return rankPaginationData
+
+export async function getUserParticipationData (): Promise<UserParticipationData> {
+    const res_week = await request({
+        url: `/user/finished/week/`,
+        method: 'get'
+    })
+
+    const res_special = await request({
+        url: `/user/finished/special/`,
+        method: 'get'
+    })
+
+    return {
+        week: {
+            events_all: res_week['events_all'],
+            events_finished: res_week['events_finished']
+        },
+        special: {
+            events_all: res_special['events_all'],
+            events_finished: res_special['events_finished']
+        }
+    }
 }
