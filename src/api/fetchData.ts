@@ -92,7 +92,8 @@ export async function getScuRecord (): Promise<Record> {
         const result_: OmittedResultAvg = {
             avg: result['avg'],
             username: result['username'],
-            event: result['event']
+            event: result['event'],
+            date: result['date']
         }
         record.avg.push(result_)
     }
@@ -101,7 +102,8 @@ export async function getScuRecord (): Promise<Record> {
         const result_: OmittedResultBest = {
             best: result['best'],
             username: result['username'],
-            event: result['event']
+            event: result['event'],
+            date: result['date']
         }
         record.best.push(result_)
     }

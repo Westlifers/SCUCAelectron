@@ -3,15 +3,17 @@
     <el-table :data="tableData" style="max-width: 1024px" :header-cell-style="{'text-align':'center'}" :cell-style="{'text-align':'center'}" border>
 
       <el-table-column label="平均">
+        <el-table-column prop="dateAvg" label="时间" />
         <el-table-column prop="usernameAvg" label="用户名" />
         <el-table-column prop="avg" label="成绩" />
       </el-table-column>
 
       <el-table-column prop="event" label="项目" />
 
-      <el-table-column prop="avg" label="单次">
+      <el-table-column label="单次">
         <el-table-column prop="best" label="成绩" />
         <el-table-column prop="usernameBest" label="用户名" />
+        <el-table-column prop="dateBest" label="时间" />
       </el-table-column>
 
     </el-table>
@@ -27,7 +29,9 @@ const record: Record = await getScuRecord()
 
 interface integratedData {
   usernameAvg: string
+  dateAvg: string
   usernameBest: string
+  dateBest: string
   avg: number
   best: number
   event: string
@@ -40,7 +44,9 @@ const tableData = computed(() => {
     let result_best = record.best[i]
     let intData: integratedData = {
       usernameAvg: result_avg.username,
+      dateAvg: result_avg.date,
       usernameBest: result_best.username,
+      dateBest: result_best.date,
       avg: result_avg.avg,
       best: result_best.best,
       event: result_best.event

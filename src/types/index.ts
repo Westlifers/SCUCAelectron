@@ -47,6 +47,7 @@ export interface DetailedCompetition extends OmittedCompetition{
 interface OmittedResult {
     event: string
     username: string
+    date: string
 }
 
 

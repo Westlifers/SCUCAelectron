@@ -1,9 +1,10 @@
 <template>
   <el-table :data="tableData" style="max-width: 920px;" border >
-    <el-table-column prop="username" label="用户名" width="400"/>
-    <el-table-column prop="avg" label="平均" v-if="aorb==='avg'" :formatter="formatter" width="260"/>
-    <el-table-column prop="best" label="最佳" v-if="aorb==='best'" :formatter="formatter" width="260"/>
-    <el-table-column prop="compId" label="比赛" width="260"/>
+    <el-table-column prop="username" label="用户名" width="320"/>
+    <el-table-column prop="avg" label="平均" v-if="aorb==='avg'" :formatter="formatter" width="200"/>
+    <el-table-column prop="best" label="最佳" v-if="aorb==='best'" :formatter="formatter" width="200"/>
+    <el-table-column prop="compId" label="比赛" width="200"/>
+    <el-table-column prop="date" label="时间" width="200"/>
   </el-table>
 </template>
 

@@ -4,6 +4,7 @@
       <DataTable :table-data="ClassifiedTableData[event]"></DataTable>
     </el-tab-pane>
   </el-tabs>
+  <div v-if="events.length===0">No data</div>
 </template>
 
 <script lang="ts" setup>
