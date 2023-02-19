@@ -15,7 +15,11 @@
         <template #title>成绩总览</template>
       </el-menu-item>
 
-      <el-menu-item index="1-2" @click="go_page('weekCubing')">
+      <el-menu-item index="1-2" @click="go_page('weekCubing')" v-if="isLoggedIn">
+        <el-icon><Grid /></el-icon>
+        <template #title>进行复原</template>
+      </el-menu-item>
+      <el-menu-item index="1-2" @click="go_page('weekCubing')" v-if="!isLoggedIn" disabled>
         <el-icon><Grid /></el-icon>
         <template #title>进行复原</template>
       </el-menu-item>
@@ -34,7 +38,11 @@
         <template #title>成绩总览</template>
       </el-menu-item>
 
-      <el-menu-item index="2-2" @click="go_page('specialCubing')">
+      <el-menu-item index="2-2" @click="go_page('specialCubing')" v-if="isLoggedIn">
+        <el-icon><Grid /></el-icon>
+        <template #title>进行复原</template>
+      </el-menu-item>
+      <el-menu-item index="2-2" @click="go_page('specialCubing')" v-if="!isLoggedIn" disabled>
         <el-icon><Grid /></el-icon>
         <template #title>进行复原</template>
       </el-menu-item>
@@ -82,12 +90,13 @@
 
 <script lang="ts" setup>
 
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import {go_page} from "@/utils";
+import {store} from "@/store";
 
 const isCollapse = ref(true)
 
-
+const isLoggedIn = computed(() => !(store.state.user.username===''))
 </script>
 
 <style scoped>

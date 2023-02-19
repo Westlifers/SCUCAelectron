@@ -1,15 +1,18 @@
 <template>
-  <el-space direction="vertical" :size="50">
-    <el-select v-model="event" class="m-2" placeholder="未参与项目" size="large">
-      <el-option
-          v-for="event in events_available"
-          :key="event"
-          :label="event"
-          :value="event"
-      />
-    </el-select>
-    <scramble-shower :scrambles_available="scrambles_available" :event="event"></scramble-shower>
-  </el-space>
+  <div v-if="isLoggedIn">
+    <el-space direction="vertical" :size="50">
+      <el-select v-model="event" class="m-2" placeholder="未参与项目" size="large">
+        <el-option
+            v-for="event in events_available"
+            :key="event"
+            :label="event"
+            :value="event"
+        />
+      </el-select>
+      <scramble-shower :scrambles_available="scrambles_available" :event="event"></scramble-shower>
+    </el-space>
+  </div>
+  <div v-else>请先<el-button v-if="!isLoggedIn" @click="go_page('login')" round>登陆</el-button></div>
 </template>
 
 <script lang="ts" setup>
@@ -19,6 +22,8 @@ import {store, UPDATE_USER_PARTICIPATION_DATA} from "@/store";
 import {getComp} from "@/api/fetchData";
 import {Scramble} from "@/types";
 import ScrambleShower from "@/components/cubing/ScrambleShower.vue";
+import {go_page} from "@/utils";
+const isLoggedIn = computed(() => !(store.state.user.username === ''))
 
 // 是否是周赛
 const is_normal = computed(() => props.comp==='week')

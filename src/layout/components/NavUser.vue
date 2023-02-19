@@ -27,6 +27,7 @@ import {CLEAR_USER, store} from "@/store";
 import {computed, ref} from "vue";
 import {logout} from "@/api/service";
 import {go_page} from "@/utils";
+import router from "@/router";
 
 const user = computed(() => store.state.user)
 const isLoggedIn = computed(() => user.value['username'] != '')
@@ -40,8 +41,9 @@ const userData = computed(() => [
 const visible = ref(false)
 
 const logout_all = async () => {
+  await router.push({name: 'overview'})
   await logout()
-  store.commit(CLEAR_USER);
+  store.commit(CLEAR_USER)
 }
 </script>
 
