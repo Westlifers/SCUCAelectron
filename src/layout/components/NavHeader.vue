@@ -1,20 +1,8 @@
 <template>
   <el-menu class="el-menu-demo" mode="horizontal" background-color="#EC4141FF" text-color="#fff" active-text-color="#ffd04b">
-    <el-menu-item index="1" disabled>社团公告</el-menu-item>
-    <el-sub-menu index="2" disabled>
-      <template #title>练习</template>
-      <el-menu-item index="2-1">item one</el-menu-item>
-      <el-menu-item index="2-2">item two</el-menu-item>
-      <el-menu-item index="2-3">item three</el-menu-item>
-      <el-sub-menu index="2-4">
-        <template #title>item four</template>
-        <el-menu-item index="2-4-1">item one</el-menu-item>
-        <el-menu-item index="2-4-2">item two</el-menu-item>
-        <el-menu-item index="2-4-3">item three</el-menu-item>
-      </el-sub-menu>
-    </el-sub-menu>
-    <el-menu-item index="3" @click="go_page('login')">
-      <template #title>登录</template>
+    <el-menu-item index="1" disabled>
+      <el-icon size="50"><ElementPlus /></el-icon>
+      <template #title> SCUCAComp </template>
     </el-menu-item>
   </el-menu>
   <el-menu class="func" text-color="#fff" active-text-color="#fff" background-color="#EC4141FF">
