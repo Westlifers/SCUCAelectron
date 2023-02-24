@@ -12,6 +12,14 @@ module.exports = defineConfig({
           installerIcon: "./build/icons/icon.ico",  //安装logo
           installerHeaderIcon: "./build/icons/icon.ico" //安装logo
         },
+        publish: [
+          {
+            provider: "github", //打包上传到github
+            owner: "Westlifers", //仓库所有者
+            repo: "SCUCAelectron", //仓库名称
+            releaseType: "release" //上传到github的版本类型（draft:草稿，prerelease:提前发行版，release:发行版）
+          }
+        ],
         electronDownload: {
           mirror: "https://npm.taobao.org/mirrors/electron/" //镜像设置
         },

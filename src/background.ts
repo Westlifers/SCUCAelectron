@@ -4,6 +4,7 @@ import {app, BrowserWindow, ipcMain, protocol} from 'electron'
 import {createProtocol} from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, {VUEJS3_DEVTOOLS} from 'electron-devtools-installer'
 import * as path from "path";
+import update from "@/update";
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -36,6 +37,11 @@ async function createWindow() {
   })
   ipcMain.on('win:restore', () => {
     win.restore()
+  })
+
+  // 渲染进程渲染完成
+  win.once('ready-to-show', () => {
+    update(win)
   })
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
