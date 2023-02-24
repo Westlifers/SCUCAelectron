@@ -16,3 +16,23 @@ export function getCookie(cName: string) {
 export function go_page(pageName) {
     router.push({name: pageName})
 }
+
+export function convert_time(validatedTimeStr: string): number {
+    let time = 0
+    validatedTimeStr = validatedTimeStr.split(' ').join('')  // 去空格
+    if (validatedTimeStr == 'DNF' || validatedTimeStr == 'dnf' || validatedTimeStr == '') {
+        return 0
+    }
+    if (validatedTimeStr.indexOf(':') > -1) {
+        time += parseFloat(validatedTimeStr.split(':')[0]) * 60
+        validatedTimeStr = validatedTimeStr.split(':')[1]
+    }
+    if (validatedTimeStr.indexOf('.') > -1) {
+        time += parseFloat(validatedTimeStr.split('.')[0])
+        time += parseFloat(validatedTimeStr.split('.')[1]) / (10 ** validatedTimeStr.split('.')[1].length)
+    }
+    else {
+        time += parseFloat(validatedTimeStr)
+    }
+    return time
+}

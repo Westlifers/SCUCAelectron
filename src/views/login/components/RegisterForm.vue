@@ -6,7 +6,7 @@
     label-width="100px"
     class="registerForm sign-up-form"
   >
-    <el-form-item label="用户名" prop="name">
+    <el-form-item label="用户名" prop="account">
       <el-input
           v-model="state.registerForm.account"
         placeholder="Enter UserName..."
@@ -83,6 +83,7 @@ const state = reactive({
 
   registerRules: {
     account: [{ required: true, trigger: "blur" }],
+    email: [{ required: true, trigger: "blur" }],
     password: [
       {
         required: true,

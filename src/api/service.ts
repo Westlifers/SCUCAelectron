@@ -23,3 +23,12 @@ export function register(data: any) {
         data
     })
 }
+
+
+export function postResult(data: any) {
+    return request({
+        url: '/result/',
+        method: 'post',
+        data
+    })
+}

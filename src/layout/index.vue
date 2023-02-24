@@ -37,6 +37,7 @@ export default defineComponent({
 
 .el-main {
   padding: 0;
+  height: calc(100vh - 60px);
 }
 
 #largest-container {

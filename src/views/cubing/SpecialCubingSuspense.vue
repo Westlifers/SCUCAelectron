@@ -6,7 +6,7 @@
 
 <script lang="ts" setup>
 
-import SubmitForm from "@/components/cubing/SubmitForm.vue";</script>
+import SubmitForm from "@/components/cubing/CubingForm.vue";</script>
 
 <style scoped>
 

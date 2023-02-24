@@ -1,75 +1,179 @@
 <template>
-  <div v-if="isLoggedIn">
-    <el-space direction="vertical" :size="50">
-      <el-select v-model="event" class="m-2" placeholder="未参与项目" size="large">
-        <el-option
-            v-for="event in events_available"
-            :key="event"
-            :label="event"
-            :value="event"
+  <el-form
+      ref="formRef"
+      :model="state.resultForm"
+      label-width="auto"
+      :size="size"
+      v-if="event"
+      :rules="state.resultRules"
+  >
+    <el-form-item label="第一次" prop="time_1">
+      <el-input
+          v-model="state.resultForm.time_1"
+          class="w-50 m-2"
+          placeholder="Type your result"
         />
-      </el-select>
-      <scramble-shower :scrambles_available="scrambles_available" :event="event"></scramble-shower>
-    </el-space>
-  </div>
-  <div v-else>请先<el-button v-if="!isLoggedIn" @click="go_page('login')" round>登陆</el-button></div>
+    </el-form-item>
+
+    <el-form-item label="第二次" prop="time_2">
+      <el-input
+          v-model="state.resultForm.time_2"
+          class="w-50 m-2"
+          placeholder="Type your result"
+      />
+    </el-form-item>
+
+    <el-form-item label="第三次" prop="time_3">
+      <el-input
+          v-model="state.resultForm.time_3"
+          class="w-50 m-2"
+          placeholder="Type your result"
+      />
+    </el-form-item>
+
+    <el-form-item label="第四次" v-if="count===5" prop="time_4">
+      <el-input
+          v-model="state.resultForm.time_4"
+          class="w-50 m-2"
+          placeholder="Type your result"
+      />
+    </el-form-item>
+
+    <el-form-item label="第五次" v-if="count===5" prop="time_5">
+      <el-input
+          v-model="state.resultForm.time_5"
+          class="w-50 m-2"
+          placeholder="Type your result"
+      />
+    </el-form-item>
+
+    <el-form-item>
+      <el-space size="large">
+        <el-button type="primary" @click="handleSubmit(formRef)">提交</el-button>
+        <el-radio-group v-model="size" label="size control">
+          <el-radio-button label="default">大</el-radio-button>
+          <el-radio-button label="small">小</el-radio-button>
+        </el-radio-group>
+      </el-space>
+    </el-form-item>
+  </el-form>
 </template>
 
 <script lang="ts" setup>
-
-import {computed, ref} from "vue";
+import {computed, reactive, ref} from 'vue'
+import {ElNotification, FormInstance} from "element-plus";
+import {postResult} from "@/api/service";
+import {convert_time} from "@/utils";
 import {store, UPDATE_USER_PARTICIPATION_DATA} from "@/store";
-import {getComp} from "@/api/fetchData";
-import {Scramble} from "@/types";
-import ScrambleShower from "@/components/cubing/ScrambleShower.vue";
-import {go_page} from "@/utils";
-const isLoggedIn = computed(() => !(store.state.user.username === ''))
+import router from "@/router";
 
-// 是否是周赛
-const is_normal = computed(() => props.comp==='week')
-// 异步获取当前比赛数据
-const compData = is_normal.value?await getComp('week'):await getComp('special')
-// 请求更新用户进度
-store.commit(UPDATE_USER_PARTICIPATION_DATA)
+const size = ref('default')
 
-// 获取用户进度
-const userParticipationData = computed(() => store.state.userParticipation)
-// 根据进度，计算相关的项目
-const events_all = computed(() =>
-    is_normal.value?
-        userParticipationData.value.week.events_all:
-        userParticipationData.value.special.events_all
-)
-const events_finished = computed(() =>
-    is_normal.value?
-        userParticipationData.value.week.events_finished:
-        userParticipationData.value.special.events_finished
-)
-const events_available = computed(() => {
-  const events_available: string[] = []
-  for (let event of events_all.value) {
-    if (!(events_finished.value.indexOf(event) > -1)) {
-      events_available.push(event)
+const formRef = ref<FormInstance>()
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+const resultValidator = (rule: any, value: string, callback: Function) => {
+  if (value == 'DNF' || value == 'dnf') {
+    callback()
+  } else {
+    const pattern = /^\s*\d+(\.\d+)?(:\d+(\.\d+)?)?\s*$/
+    if (pattern.test(value)) {
+      callback()
+    }
+    else {
+      callback(new Error('成绩格式错误'))
     }
   }
-  return events_available
+}
+
+const state = reactive({
+  resultForm: {
+    time_1: '',
+    time_2: '',
+    time_3: '',
+    time_4: '',
+    time_5: '',
+  },
+  resultRules: {
+    time_1: [{
+      required: true,
+      trigger: "blur",
+      validator: resultValidator
+    }],
+    time_2: [{
+      required: true,
+      trigger: "blur",
+      validator: resultValidator
+    }],
+    time_3: [{
+      required: true,
+      trigger: "blur",
+      validator: resultValidator
+    }],
+    time_4: [{
+      trigger: "blur",
+      validator: resultValidator
+    }],
+    time_5: [{
+      trigger: "blur",
+      validator: resultValidator
+    }],
+  }
 })
 
-// 已选项目
-const event = ref('')
-// 未完成的打乱
-const scrambles_available = computed(() => {
-  const scramble_set: Scramble[] = []
-  for (let scramble of compData.scramble_set) {
-    if (events_available.value.indexOf(scramble.event) > -1) {
-      scramble_set.push(scramble)
+const handleSubmit =  (formEl: FormInstance | undefined) => {
+  if (!formEl) return
+
+  formEl.validate(async (valid) => {
+    if (valid) {
+      const req = {
+        competition: props.compId,
+        event: props.event,
+        time_1: convert_time(state.resultForm.time_1),
+        time_2: convert_time(state.resultForm.time_2),
+        time_3: convert_time(state.resultForm.time_3),
+        time_4: convert_time(state.resultForm.time_4),
+        time_5: convert_time(state.resultForm.time_5),
+      }
+      try {
+        const data = await postResult(req)
+        ElNotification({
+          title: '成功',
+          message: '提交成功！',
+          type: 'success',
+        })
+        store.commit(UPDATE_USER_PARTICIPATION_DATA)
+        if (props.is_normal) {
+          await router.push({name: 'overview'})
+        }
+        else {
+          await router.push({name: 'special'})
+        }
+      }
+      catch (e) {
+        ElNotification({
+          title: '失败',
+          message: '提交成绩失败！',
+          type: 'warning',
+        })
+      }
     }
+  })
+}
+
+const count = computed(() => {
+  const specs: string[] = ['333bld', '444bld', '555bld', '666', '777']
+  if (specs.indexOf(props.event) > -1) {
+    return 3
+  } else {
+    return 5
   }
-  return scramble_set
 })
 
 const props = defineProps<{
-  comp: string
+  event: string
+  compId: string
+  is_normal: boolean
 }>()
 </script>
 

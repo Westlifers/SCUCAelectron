@@ -1,18 +1,21 @@
 <template>
-  <el-space :size="100">
+  <el-space direction="vertical" :size="100">
     <el-space>
-      <el-button type="primary" icon="ArrowLeft" @click="subIndex" v-if="index > 1" />
-      <el-button type="primary" icon="ArrowLeft" @click="subIndex" v-if="index === 1" disabled />
-      <el-progress type="dashboard" :percentage="percentage * 100">
-        <template #default>
-          <span class="percentage-value">{{ index }} / {{ maxScrambleCount }}</span>
-          <span class="percentage-label">Progressing</span>
-        </template>
-      </el-progress>
-      <el-button type="primary" icon="ArrowRight" @click="addIndex" v-if="index < maxScrambleCount" />
-      <el-button type="primary" icon="ArrowRight" @click="addIndex" v-if="index === maxScrambleCount" disabled />
+      <el-space>
+        <el-button type="primary" icon="ArrowLeft" @click="subIndex" v-if="index > 1" />
+        <el-button type="primary" icon="ArrowLeft" @click="subIndex" v-if="index === 1" disabled />
+        <el-progress type="dashboard" :percentage="percentage * 100">
+          <template #default>
+            <span class="percentage-value">{{ index }} / {{ maxScrambleCount }}</span>
+            <span class="percentage-label">Progressing</span>
+          </template>
+        </el-progress>
+        <el-button type="primary" icon="ArrowRight" @click="addIndex" v-if="index < maxScrambleCount" />
+        <el-button type="primary" icon="ArrowRight" @click="addIndex" v-if="index === maxScrambleCount" disabled />
+      </el-space>
+      <el-card shadow="hover" style="width: 500px; line-height: 1.7">{{scrambleOfEvent[index - 1]}}</el-card>
     </el-space>
-    <el-card shadow="hover" style="width: 500px">{{scrambleOfEvent[index - 1]}}</el-card>
+    <submit-form :event="event" :comp-id="compId" :is_normal="is_normal"/>
   </el-space>
 </template>
 
@@ -20,6 +23,7 @@
 
 import {Scramble} from "@/types";
 import {computed, ref, watch} from "vue";
+import SubmitForm from "@/components/cubing/SubmitForm.vue";
 
 const maxScrambleCount = computed(() => {
   const specs: string[] = ['333bld', '444bld', '555bld', '666', '777']
@@ -50,6 +54,8 @@ const scrambleOfEvent = computed(() => {
 const props = defineProps<{
   scrambles_available: Scramble[]
   event: string
+  compId: string
+  is_normal: boolean
 }>()
 
 // 重选项目时重置index，防止溢出

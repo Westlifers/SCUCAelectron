@@ -1,12 +1,12 @@
 <template>
   <Suspense>
-    <submit-form comp="week" />
+    <cubing-form comp="week" />
   </Suspense>
 </template>
 
 <script lang="ts" setup>
 
-import SubmitForm from "@/components/cubing/SubmitForm.vue";</script>
+import CubingForm from "@/components/cubing/CubingForm.vue";</script>
 
 <style scoped>
 
