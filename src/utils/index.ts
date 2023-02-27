@@ -36,3 +36,9 @@ export function convert_time(validatedTimeStr: string): number {
     }
     return time
 }
+
+export function time_convert(time: number): string {
+    const min = Math.floor(time / 60)
+    const sec = (time % 60).toFixed(3)
+    return min>0?`${min}: ${sec}`:`${sec}`
+}

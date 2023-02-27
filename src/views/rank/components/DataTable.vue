@@ -11,10 +11,11 @@
 <script lang="ts" setup>
 import {TableColumnCtx} from "element-plus";
 import {OmittedResultAvgWithCompId, OmittedResultBestWithCompId, Result} from "@/types";
+import {time_convert} from "@/utils";
 
 const formatter = (row: Result, column: TableColumnCtx<Result>) => {
   const val = row[column.property]
-  return val>0?val:'DNF'
+  return val>0?time_convert(val):'DNF'
 }
 
 defineProps<{

@@ -5,13 +5,13 @@
       <el-table-column label="平均">
         <el-table-column prop="dateAvg" label="时间" />
         <el-table-column prop="usernameAvg" label="用户名" />
-        <el-table-column prop="avg" label="成绩" />
+        <el-table-column prop="avg" :formatter="formatter" label="成绩" />
       </el-table-column>
 
       <el-table-column prop="event" label="项目" />
 
       <el-table-column label="单次">
-        <el-table-column prop="best" label="成绩" />
+        <el-table-column prop="best" :formatter="formatter" label="成绩" />
         <el-table-column prop="usernameBest" label="用户名" />
         <el-table-column prop="dateBest" label="时间" />
       </el-table-column>
@@ -21,11 +21,18 @@
 </template>
 
 <script lang="ts" setup>
-import {Record} from "@/types";
+import {Record, Result} from "@/types";
 import {getScuRecord} from "@/api/fetchData";
 import {computed} from "vue";
+import {TableColumnCtx} from "element-plus";
+import {time_convert} from "@/utils";
 
 const record: Record = await getScuRecord()
+
+const formatter = (row: Result, column: TableColumnCtx<Result>) => {
+  const val = row[column.property]
+  return val>0?time_convert(val):'DNF'
+}
 
 interface integratedData {
   usernameAvg: string
