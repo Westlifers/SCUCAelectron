@@ -5,8 +5,8 @@ import {getCookie} from "@/utils";
 
 
 const request = axios.create({
-    baseURL: 'http://localhost:8000',
-    // baseURL: 'https://yougi.top/',
+    // baseURL: 'http://localhost:8000',
+    baseURL: 'https://yougi.top/',
     withCredentials: true
 })
 
