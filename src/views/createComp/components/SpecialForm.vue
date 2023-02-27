@@ -86,10 +86,11 @@ const submitForm = (formEl: FormInstance | undefined) => {
   formEl.validate(async (valid) => {
     if (valid) {
       const req = {
+        compId: state.createForm.compId,
         events: state.createForm.checkedEvents
       }
       try {
-        await createCompetition('week', req)
+        await createCompetition('special', req)
         ElNotification({
           title: '成功',
           message: '创建比赛成功！',
