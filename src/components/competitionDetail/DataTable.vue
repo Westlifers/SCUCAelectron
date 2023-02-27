@@ -6,8 +6,8 @@
     <el-table-column prop="time_3" label="第三次" :formatter="formatter" width="120"/>
     <el-table-column prop="time_4" label="第四次" :formatter="formatter" width="120"/>
     <el-table-column prop="time_5" label="第五次" :formatter="formatter" width="120"/>
-    <el-table-column prop="avg" label="平均" :formatter="formatter" width="120"/>
-    <el-table-column prop="best" label="最佳" :formatter="formatter" width="120"/>
+    <el-table-column prop="avg" label="平均" :formatter="formatter" width="120" :sortable="true" :sort-method="sort_avg_count_in_zero"/>
+    <el-table-column prop="best" label="最佳" :formatter="formatter" width="120" :sortable="true" :sort-method="sort_best_count_in_zero"/>
   </el-table>
 </template>
 
@@ -20,6 +20,30 @@ import {time_convert} from "@/utils";
 const formatter = (row: Result, column: TableColumnCtx<Result>) => {
   const val = row[column.property]
   return val>0?time_convert(val):'DNF'
+}
+
+const sort_avg_count_in_zero = (obj_a, obj_b) => {
+  let a = obj_a.avg
+  let b = obj_b.avg
+  if (a == 0) {
+    a = Infinity
+  }
+  if (b == 0) {
+    b = Infinity
+  }
+  return a - b
+}
+
+const sort_best_count_in_zero = (obj_a, obj_b) => {
+  let a = obj_a.best
+  let b = obj_b.best
+  if (a == 0) {
+    a = Infinity
+  }
+  if (b == 0) {
+    b = Infinity
+  }
+  return a - b
 }
 
 defineProps<{

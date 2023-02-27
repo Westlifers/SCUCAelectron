@@ -2,6 +2,8 @@
   <div class="record-table">
     <el-table :data="tableData" style="max-width: 1024px" :header-cell-style="{'text-align':'center'}" :cell-style="{'text-align':'center'}" border>
 
+      <el-table-column type="index"/>
+
       <el-table-column label="平均">
         <el-table-column prop="dateAvg" label="时间" />
         <el-table-column prop="usernameAvg" label="用户名" />
