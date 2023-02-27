@@ -10,6 +10,7 @@ import historyDetailSuspense from "@/views/history/detail/HistoryDetailSuspense.
 import rankSuspense from "@/views/rank/RankSuspense.vue";
 import weekCubingSuspense from "@/views/cubing/WeekCubingSuspense.vue";
 import specialCubingSuspense from "@/views/cubing/SpecialCubingSuspense.vue";
+import createCompetitionSuspense from "@/views/createComp/createCompetitionSuspense.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -92,6 +93,19 @@ const routes: Array<RouteRecordRaw> = [
         path: 'index',
         component: rankSuspense,
         name: 'rank'
+      }
+    ]
+  },
+
+
+  {
+    path: '/create',
+    component: layout,
+    children: [
+      {
+        path: 'index',
+        component: createCompetitionSuspense,
+        name: 'create'
       }
     ]
   },

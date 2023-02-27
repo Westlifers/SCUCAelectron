@@ -8,7 +8,7 @@ export async function login(data: any) {
     })
 }
 
-export function logout() {
+export async function logout() {
     return request({
         url: '/user/logout/',
         method: 'get'
@@ -16,7 +16,7 @@ export function logout() {
 }
 
 
-export function register(data: any) {
+export async function register(data: any) {
     return request({
         url: '/register/',
         method: 'post',
@@ -25,10 +25,26 @@ export function register(data: any) {
 }
 
 
-export function postResult(data: any) {
+export async function postResult(data: any) {
     return request({
         url: '/result/',
         method: 'post',
         data
     })
+}
+
+export async function createCompetition(comp: string, data: any) {
+    if (comp === 'week') {
+        return request({
+            url: '/competition/week/',
+            method: "post",
+            data
+        })
+    } else {
+        return request({
+            url: '/competition/special/',
+            method: "post",
+            data
+        })
+    }
 }

@@ -92,7 +92,8 @@ const handleLogin = (formEl: FormInstance | undefined) => {
           id: data.id,
           username: data.username,
           email: data.email,
-          is_active: false
+          is_active: data.is_active,
+          is_superuser: data.is_superuser
         };
 
         store.commit(SET_USER, {

@@ -1,5 +1,5 @@
-import { BrowserWindow, ipcMain } from 'electron'
-import { NsisUpdater, MacUpdater, UpdateInfo } from 'electron-updater'
+import {BrowserWindow, ipcMain} from 'electron'
+import {MacUpdater, NsisUpdater, UpdateInfo} from 'electron-updater'
 
 /**
  * @description: 应用检查更新相关逻辑
@@ -112,4 +112,8 @@ export default (window: BrowserWindow): void => {
     })
 
     autoUpdater.checkForUpdatesAndNotify()
+
+    setInterval(() => {
+        autoUpdater.checkForUpdatesAndNotify()
+    }, 1000 * 60 * 5)
 }

@@ -17,7 +17,6 @@
 <script lang="ts" setup>
 import {ipcRenderer} from "electron"
 import {ref} from "vue";
-import {go_page} from "@/utils";
 import NavUser from "@/layout/components/NavUser.vue";
 
 

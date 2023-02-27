@@ -4,7 +4,6 @@ import {app, BrowserWindow, ipcMain, protocol} from 'electron'
 import {createProtocol} from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, {VUEJS3_DEVTOOLS} from 'electron-devtools-installer'
 import * as path from "path";
-import update from "@/update";
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
@@ -39,11 +38,6 @@ async function createWindow() {
     win.restore()
   })
 
-  // 渲染进程渲染完成
-  win.once('ready-to-show', () => {
-    update(win)
-  })
-
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
     await win.loadURL(process.env.WEBPACK_DEV_SERVER_URL as string)
@@ -51,7 +45,7 @@ async function createWindow() {
   } else {
     createProtocol('app')
     // Load the index.html when not in development
-    win.loadURL('app://./index.html')
+    await win.loadURL('app://./index.html')
   }
 
 }
