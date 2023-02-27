@@ -1,36 +1,57 @@
 <template>
   <div class="about">
-    <el-card class="box-card" shadow="hover">
-      <template #header>
-        <div class="card-header">
-          <span>我们是谁？</span>
+    <span>四川大学魔方协会 SCUCAComp v{{version}}</span>
+    <span>本项目已开源至GitHub: <el-link type="primary" :underline="true">https://github.com/Westlifers/SCUCAelectron</el-link></span>
+
+    <el-divider>
+      <el-icon><star-filled /></el-icon>
+    </el-divider>
+
+    <div class="power">
+      <el-space size="large">Powered By:
+        <div class="icons">
+          <span><el-icon><ChromeFilled /></el-icon> <svg style="width: 16px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M224 398.8c-11.8 5.1-23.4 9.7-34.9 13.5c16.7 33.8 31 35.7 34.9 35.7s18.1-1.9 34.9-35.7c-11.4-3.9-23.1-8.4-34.9-13.5zM414 256c33 45.2 44.3 90.9 23.6 128c-20.2 36.3-62.5 49.3-115.2 43.2c-22 52.1-55.7 84.8-98.4 84.8s-76.4-32.7-98.4-84.8c-52.7 6.1-95-6.8-115.2-43.2C-10.3 346.9 1 301.2 34 256C1 210.8-10.3 165.1 10.4 128C30.6 91.7 72.9 78.7 125.6 84.8C147.6 32.7 181.2 0 224 0s76.4 32.7 98.4 84.8c52.7-6.1 95 6.8 115.2 43.2c20.7 37.1 9.4 82.8-23.6 128zm-65.8 67.4c-1.7 14.2-3.9 28-6.7 41.2c31.8 1.4 38.6-8.7 40.2-11.7c2.3-4.2 7-17.9-11.9-48.1c-6.8 6.3-14 12.5-21.6 18.6zm-6.7-175.9c2.8 13.1 5 26.9 6.7 41.2c7.6 6.1 14.8 12.3 21.6 18.6c18.9-30.2 14.2-44 11.9-48.1c-1.6-2.9-8.4-13-40.2-11.7zM258.9 99.7C242.1 65.9 227.9 64 224 64s-18.1 1.9-34.9 35.7c11.4 3.9 23.1 8.4 34.9 13.5c11.8-5.1 23.4-9.7 34.9-13.5zm-159 88.9c1.7-14.3 3.9-28 6.7-41.2c-31.8-1.4-38.6 8.7-40.2 11.7c-2.3 4.2-7 17.9 11.9 48.1c6.8-6.3 14-12.5 21.6-18.6zM78.2 304.8C59.4 335 64 348.7 66.3 352.9c1.6 2.9 8.4 13 40.2 11.7c-2.8-13.1-5-26.9-6.7-41.2c-7.6-6.1-14.8-12.3-21.6-18.6zM304 256a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zm-80-32a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg> Electron</span>
+          <span><el-icon><ElementPlus /></el-icon> Element-Plus</span>
+          <span><svg style="width: 16px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M356.9 64.3H280l-56 88.6-48-88.6H0L224 448 448 64.3h-91.1zm-301.2 32h53.8L224 294.5 338.4 96.3h53.8L224 384.5 55.7 96.3z"/></svg> Vue.js</span>
         </div>
-      </template>
-      <div class="text">
-        <p>四川大学魔方协会成立于2013年11月，最初为院级社团，挂靠于华西临床医学院。</p>
-        <p>我们是</p>
-      </div>
-    </el-card>
+      </el-space>
+    </div>
+
   </div>
 </template>
 
 <script lang="ts" setup>
-
+import {ref} from "vue";
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const version = ref(require("../../../package.json").version)
 </script>
 
 <style scoped>
 .about {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: left;
-  max-width: 30%;
+  padding-top: 50px;
 }
+
 .text {
   display: flex;
   flex-wrap: wrap;
   justify-content: left;
   text-align: left;
   text-indent:2em
+}
+
+.power {
+  display: flex;
+  justify-content: center;
+}
+
+.icons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 40px;
 }
 
 </style>
